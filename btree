@@ -1,0 +1,68 @@
+class Stack:
+    pass
+
+class BTreeNode:
+    def __init__(self):
+        self.K = []
+        self.n = 0
+        self.P = []
+
+    def __str__(self):
+        return f"{self.K}"
+
+
+
+class BTree:
+    def __init__(self):
+        self.root = None
+        self.stack = []
+
+    def insertBT(self, m, newKey):
+        def searchPath(T, m, key):
+            x = T.root
+            stack = []
+
+            i = 0
+            while x.P[i] is not None:
+                while i <= x.n and key > x.K[i]:
+                    i += 1
+
+                if i <= x.n and key == x.K[i]:
+                    return True, stack
+
+
+                stack.append(x)
+
+            return False, stack
+
+        def insertKey(T, m, x, y, newKey):
+            i = x.n
+
+            while i >= 1 and newKey < x.K[i]:
+                x.K[i+1] = x.K[i]
+                x.P[i+1] = x.P[i]
+                i -= 1
+
+            x.K[i] = newKey
+            x.P[i] = y
+            x.n = x.n + 1
+
+        def splitNode(T, m, x, y, newKey):
+            pass
+
+        if self.root is None:
+            self.root = BTreeNode()
+            self.root.K[0] = newKey
+            self.root.n += 1
+            return
+
+        found, stack = searchPath(self, m, newKey)
+        if found is True:
+            return
+
+
+            
+
+    def deleteBT(self, m, oldKey):
+        pass
+
