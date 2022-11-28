@@ -103,4 +103,12 @@ class BTree:
                     finished = True
 
     def deleteBT(self, m, oldKey):
-        pass
+        found, stack = searchPath(self, m, oldKey, None)
+        if found is False:
+            return
+
+        x = stack.pop()
+
+        if len(oldKey.P) == 0:
+            internalNode = x
+            i = internalNode.K
